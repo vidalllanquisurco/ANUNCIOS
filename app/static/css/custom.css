@@ -1,0 +1,20 @@
+/* app/static/css/custom.css */
+
+/* Ajustes generales para el diseño institucional */
+body {
+    background-color: #f8f9fa;
+}
+
+header {
+    border-bottom: 4px solid #0d6efd;
+}
+
+/* Estilo para las tarjetas del tablón de anuncios */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}

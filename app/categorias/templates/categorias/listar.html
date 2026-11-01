@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🏷️ Gestión de Categorías</h2>
+    <a href="{{ url_for('categorias.crear') }}" class="btn btn-primary">Nueva Categoría</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in categorias %}
+                <tr>
+                    <td>{{ cat.id }}</td>
+                    <td><strong>{{ cat.nombre }}</strong></td>
+                    <td>{{ cat.descripcion or 'Sin descripción' }}</td>
+                    <td class="text-end">
+                        <div class="btn-group" role="group">
+                                    <!-- Botón Editar -->
+                                    <a href="{{ url_for('categorias.editar', id=cat.id) }}" class="btn btn-sm btn-outline-primary" title="Editar categoria">
+                                        Editar
+                                    </a>
+
+                                    <!-- Botón para eliminar con confirmación -->
+                                     <form action="{{ url_for('categorias.eliminar', id=cat.id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar esta categoría?');">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                     </form>
+                                </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted py-4">No hay categorías registradas todavía.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Bloque para mostrar mensajes Flash (Alertas) -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <!-- 
+                  Bootstrap usa las categorías: 
+                  'info' o 'success' -> alert-success o alert-info
+                  'warning' -> alert-warning
+                  'danger' -> alert-danger
+                -->
+                <div class="alert alert-{{ 'danger' if category == 'danger' else ('warning' if category == 'warning' else 'success') }} alert-dismissible fade show shadow-sm" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

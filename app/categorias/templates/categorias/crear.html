@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+            <h3 class="mb-3 text-center">➕ Registrar Nueva Categoría</h3>
+            
+            <form method="POST">
+                <!-- Nombre de la categoría -->
+                <div class="mb-3">
+                    <label class="form-label">Nombre de la Categoría</label>
+                    <input type="text" name="nombre" class="form-control" placeholder="Ej. Tecnología, Ventas, Avisos..." required>
+                </div>
+
+                <!-- Descripción opcional -->
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea name="descripcion" rows="3" class="form-control" placeholder="Breve detalle de la categoría..."></textarea>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('categorias.listar') }}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar Categoría</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

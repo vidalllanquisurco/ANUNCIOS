@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Inicio - Tablón de Anuncios{% endblock %}
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold text-primary">Bienvenido al Tablón Institucional</h1>
+        <p class="col-md-8 fs-4 text-muted">Consulte y publique avisos, comunicados y eventos oficiales de nuestra comunidad académica.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('anuncios.listar') }}">Ver todos los anuncios</a>
+    </div>
+</div>
+
+<h2 class="mb-3">📢 Últimos Anuncios Publicados</h2>
+<div class="row">
+    {% for anuncio in anuncios %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">{{ anuncio.categoria.nombre }}</span>
+                <h5 class="card-title">{{ anuncio.titulo }}</h5>
+                <p class="card-text text-truncate">{{ anuncio.contenido }}</p>
+                <small class="text-muted">Por: {{ anuncio.usuario.nombre }}</small>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="text-muted">No hay anuncios publicados recientemente.</p>
+    {% endfor %}
+</div>
+{% endblock %}

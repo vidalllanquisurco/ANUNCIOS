@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Anuncios{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Listado de Anuncios</h2>
+    <a href="{{ url_for('anuncios.crear') }}" class="btn btn-success">+ Nuevo Anuncio</a>
+</div>
+<!-- Tu tabla o tarjetas de anuncios aquí -->
+{% endblock %}
